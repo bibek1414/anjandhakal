@@ -3,23 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anjan Dhakal</title>
-     <!-- Favicon -->
-     <link rel="icon" href="anjandhakal.jpeg" type="image/png">
-    
-     <!-- Optional: You can also add a 16x16 favicon for better support -->
-     <link rel="icon" href="anjandhakal.jpeg" sizes="16x16" type="image/png">
+    <title>Anjan Dhakal | Entrepreneur & Business Professional</title>
+    <meta name="description" content="Portfolio of Anjan Dhakal, Founder of Aakar Education and Chiya Mahol, showcasing his journey, values, and professional experience.">
+    <!-- Favicon -->
+    <link rel="icon" href="anjandhakal.jpeg" type="image/png">
+    <link rel="icon" href="anjandhakal.jpeg" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="anjandhakal.jpeg">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         /* Global Styles */
         :root {
             --primary: #2563eb;
             --primary-dark: #1e40af;
+            --primary-light: #93c5fd;
             --secondary: #f59e0b;
+            --secondary-dark: #d97706;
             --dark: #1f2937;
+            --darker: #111827;
             --light: #f9fafb;
+            --lighter: #ffffff;
             --gray: #6b7280;
             --light-gray: #e5e7eb;
+            --facebook: #1877f2;
+            --instagram: #e1306c;
+            --twitter: #1da1f2;
+            --linkedin: #0077b5;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         * {
@@ -29,11 +41,17 @@
         }
         
         body {
-            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.7;
             color: var(--dark);
             background-color: var(--light);
             scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, .section-title, .quote {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
         }
         
         .container {
@@ -73,8 +91,28 @@
             border-radius: 50px;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+            z-index: -1;
+            transition: width 0.4s ease;
+        }
+        
+        .btn:hover::before {
+            width: 100%;
         }
         
         .btn-primary {
@@ -85,8 +123,8 @@
         
         .btn-primary:hover {
             background-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
         }
         
         .btn-outline {
@@ -98,6 +136,8 @@
         .btn-outline:hover {
             background-color: var(--primary);
             color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
         }
         
         .card {
@@ -105,12 +145,31 @@
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             padding: 2.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
         }
         
         .card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card:hover::after {
+            transform: scaleX(1);
         }
         
         .text-center {
@@ -145,12 +204,14 @@
             z-index: 1000;
             background-color: rgba(255, 255, 255, 0.95);
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
         }
         
         header.scrolled {
             background-color: rgba(255, 255, 255, 0.98);
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
         }
         
         nav {
@@ -158,6 +219,11 @@
             justify-content: space-between;
             align-items: center;
             padding: 1.5rem 0;
+            transition: padding 0.4s ease;
+        }
+        
+        header.scrolled nav {
+            padding: 0.5rem 0;
         }
         
         .logo {
@@ -165,6 +231,10 @@
             font-weight: 700;
             color: var(--primary);
             text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
         .logo span {
@@ -183,6 +253,7 @@
             font-size: 1.05rem;
             transition: color 0.3s ease;
             position: relative;
+            padding: 0.5rem 0;
         }
         
         .nav-links a:hover {
@@ -192,7 +263,7 @@
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 0;
             height: 2px;
@@ -211,6 +282,12 @@
             font-size: 1.5rem;
             color: var(--dark);
             cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .mobile-menu-btn:hover {
+            transform: rotate(90deg);
         }
         
         /* Hero Section */
@@ -239,6 +316,7 @@
             z-index: 1;
             max-width: 800px;
             margin: 0 auto;
+            animation: fadeInUp 1s ease;
         }
         
         .profile-photo {
@@ -248,12 +326,21 @@
             border: 5px solid rgba(255, 255, 255, 0.2);
             margin: 0 auto 2rem;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            transition: var(--transition);
+            animation: fadeIn 1s ease, pulse 2s infinite 1s;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
         }
         
         .profile-photo:hover {
             transform: scale(1.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.3);
         }
         
         .profile-photo img {
@@ -267,6 +354,7 @@
             font-weight: 800;
             margin-bottom: 1rem;
             line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
         .hero p {
@@ -274,6 +362,7 @@
             max-width: 600px;
             margin: 0 auto 2rem;
             opacity: 0.9;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
         }
         
         .hero-btns {
@@ -310,12 +399,23 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        .about-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
         }
         
         .about-image img {
             width: 100%;
             height: auto;
             display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
         }
         
         .quote {
@@ -325,6 +425,18 @@
             border-left: 4px solid var(--secondary);
             padding-left: 1.5rem;
             margin: 2rem 0;
+            position: relative;
+        }
+        
+        .quote::before {
+            content: '"';
+            position: absolute;
+            top: -1rem;
+            left: 0.5rem;
+            font-size: 4rem;
+            color: rgba(245, 158, 11, 0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
         }
         
         /* Values Section */
@@ -344,7 +456,7 @@
             padding: 2rem;
             border-radius: 12px;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
         
         .value-card:hover {
@@ -356,6 +468,12 @@
             font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .value-card:hover .value-icon {
+            transform: scale(1.2);
+            color: var(--secondary);
         }
         
         .value-card h3 {
@@ -396,6 +514,14 @@
             position: relative;
             margin-bottom: 3rem;
             width: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .timeline-item:nth-child(odd) {
@@ -419,6 +545,13 @@
             background-color: var(--primary);
             border: 4px solid white;
             box-shadow: 0 0 0 2px var(--primary);
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover .timeline-dot {
+            transform: translateX(-50%) scale(1.2);
+            background-color: var(--secondary);
+            box-shadow: 0 0 0 2px var(--secondary);
         }
         
         .timeline-content {
@@ -426,6 +559,12 @@
             padding: 1.5rem;
             border-radius: 8px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover .timeline-content {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
         }
         
         .timeline-date {
@@ -473,7 +612,7 @@
             padding: 1.5rem;
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: var(--transition);
         }
         
         .contact-card:hover {
@@ -485,6 +624,12 @@
             font-size: 1.5rem;
             color: var(--primary);
             min-width: 40px;
+            transition: var(--transition);
+        }
+        
+        .contact-card:hover .contact-icon {
+            transform: rotate(15deg) scale(1.2);
+            color: var(--secondary);
         }
         
         .contact-details h3 {
@@ -519,17 +664,51 @@
             background-color: white;
             color: var(--gray);
             font-size: 1.2rem;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, currentColor, rgba(255,255,255,0.3));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .social-link:hover::before {
+            opacity: 0.2;
         }
         
         .social-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .social-link.facebook {
+            color: var(--facebook);
+        }
+        
+        .social-link.instagram {
+            color: var(--instagram);
+        }
+        
+        .social-link.twitter {
+            color: var(--twitter);
+        }
+        
+        .social-link.linkedin {
+            color: var(--linkedin);
         }
         
         .social-link.facebook:hover {
-            background-color: #1877f2;
+            background-color: var(--facebook);
             color: white;
         }
         
@@ -539,12 +718,12 @@
         }
         
         .social-link.twitter:hover {
-            background-color: #1da1f2;
+            background-color: var(--twitter);
             color: white;
         }
         
         .social-link.linkedin:hover {
-            background-color: #0077b5;
+            background-color: var(--linkedin);
             color: white;
         }
         
@@ -554,6 +733,17 @@
             color: white;
             padding: 3rem 0 1.5rem;
             text-align: center;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
         }
         
         .footer-content {
@@ -568,6 +758,7 @@
             font-weight: 700;
             color: white;
             text-decoration: none;
+            font-family: 'Playfair Display', serif;
         }
         
         .footer-logo span {
@@ -585,10 +776,26 @@
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
         }
         
         .footer-links a:hover {
             color: white;
+        }
+        
+        .footer-links a:hover::after {
+            width: 100%;
         }
         
         .footer-social {
@@ -598,12 +805,13 @@
         
         .footer-social a {
             color: rgba(255, 255, 255, 0.8);
-            font-size: 2rem;
-            transition: color 0.3s ease;
+            font-size: 1.5rem;
+            transition: var(--transition);
         }
         
         .footer-social a:hover {
             color: white;
+            transform: translateY(-5px);
         }
         
         .copyright {
@@ -613,6 +821,56 @@
             color: rgba(255, 255, 255, 0.6);
             font-size: 0.9rem;
             width: 100%;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 20px rgba(37, 99, 235, 0.3);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
         }
         
         /* Responsive Styles */
@@ -630,7 +888,21 @@
         
         @media (max-width: 768px) {
             .nav-links {
-                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.4s ease;
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                right: 0;
             }
             
             .mobile-menu-btn {
@@ -690,6 +962,11 @@
                 width: 150px;
                 height: 150px;
             }
+            
+            .btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -698,7 +975,9 @@
     <header id="header">
         <div class="container">
             <nav>
-                <a href="#" class="logo">Anjan<span>Dhakal</span></a>
+                <a href="#" class="logo">
+                    <i class="fas fa-user-tie"></i> Anjan<span>Dhakal</span>
+                </a>
                 
                 <div class="nav-links">
                     <a href="#home">Home</a>
@@ -723,7 +1002,7 @@
             </div>
             
             <h1>Anjan Dhakal</h1>
-            <p>Learner • Dreamer • Explorer</p>
+            <p>Entrepreneur • Business Professional • Community Builder</p>
             
             <div class="hero-btns">
                 <a href="Resume.pdf" class="btn btn-primary" download>
@@ -924,7 +1203,7 @@
                         </div>
                     </div>
                     
-                    <!-- <div class="contact-card">
+                    <div class="contact-card">
                         <div class="contact-icon">
                             <i class="fas fa-share-alt"></i>
                         </div>
@@ -945,7 +1224,7 @@
                                 </a>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -955,7 +1234,9 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <a href="#" class="footer-logo">Anjan<span>Dhakal</span></a>
+                <a href="#" class="footer-logo">
+                    <i class="fas fa-user-tie"></i> Anjan<span>Dhakal</span>
+                </a>
                 
                 <!-- <div class="footer-links">
                     <a href="#home">Home</a>
@@ -968,7 +1249,7 @@
                 
                 <div class="footer-social">
                     <a href="https://www.facebook.com/anjandhakall"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/anjandhakal_/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/_anjandhakal/"><i class="fab fa-instagram"></i></a>
                     <a href="https://x.com/_anjandhakal"><i class="fab fa-twitter"></i></a>
                     <a href="https://www.linkedin.com/in/anjandhakal369/"><i class="fab fa-linkedin-in"></i></a>
                 </div>
@@ -980,6 +1261,11 @@
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
     <script>
         // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
@@ -987,10 +1273,18 @@
         // Header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.getElementById('header');
+            const backToTop = document.querySelector('.back-to-top');
+            
             if (window.scrollY > 50) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
+            }
+            
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
             }
         });
         
@@ -1016,17 +1310,68 @@
         const navLinks = document.querySelector('.nav-links');
         
         mobileMenuBtn.addEventListener('click', function() {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.classList.toggle('active');
+            this.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
         });
         
         // Close mobile menu when clicking on a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', function() {
                 if (window.innerWidth <= 768) {
-                    navLinks.style.display = 'none';
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
                 }
             });
         });
+        
+        // Back to top button
+        document.querySelector('.back-to-top').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Timeline animation on scroll
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        const animateOnScroll = () => {
+            timelineItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (itemTop < windowHeight - 100) {
+                    item.classList.add('visible');
+                }
+            });
+        };
+        
+        // Initial check
+        animateOnScroll();
+        
+        // Check on scroll
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Add animation to elements when they come into view
+        const animateElements = () => {
+            const elements = document.querySelectorAll('.about-content, .values-grid, .contact-container');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.style.animation = 'fadeInUp 1s ease forwards';
+                }
+            });
+        };
+        
+        // Initial check
+        animateElements();
+        
+        // Check on scroll
+        window.addEventListener('scroll', animateElements);
     </script>
 </body>
 </html>
