@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anjan Dhakal Portfolio</title>
+    <title>Anjan Dhakal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset and base styles */
+        /* Global Styles */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #f59e0b;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --gray: #6b7280;
+            --light-gray: #e5e7eb;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -13,326 +24,986 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9fafb;
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background-color: var(--light);
+            scroll-behavior: smooth;
         }
         
-        .flex {
-            display: flex;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
         
-        .flex-col {
-            flex-direction: column;
+        section {
+            padding: 5rem 0;
         }
         
-        .items-center {
-            align-items: center;
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            color: var(--dark);
         }
         
-        .justify-center {
-            justify-content: center;
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
         }
         
-        .min-h-screen {
-            min-height: 100vh;
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background-color: transparent;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 2.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
         }
         
         .text-center {
             text-align: center;
         }
         
-        /* Header Styles */
-        .header {
-            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-            padding: 5rem 0;
+        .highlight {
+            position: relative;
+            display: inline-block;
+            z-index: 1;
+        }
+        
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background-color: rgba(251, 191, 36, 0.4);
+            z-index: -1;
+            transform: rotate(-1deg);
+            border-radius: 2px;
+        }
+        
+        /* Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 10rem 0 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgZmlsbD0idXJsKCNwYXR0ZXJuKSIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIvPjwvc3ZnPg==');
+            opacity: 0.6;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
         .profile-photo {
-            margin-bottom: 1.5rem;
-        }
-        
-        .photo-container {
-            width: 12rem;
-            height: 12rem;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            margin: 0 auto 2rem;
             overflow: hidden;
-            border: 4px solid white;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
         }
         
-        .photo-container:hover {
+        .profile-photo:hover {
             transform: scale(1.05);
         }
         
-        .photo-container img {
+        .profile-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
         
-        .name-tagline {
-            text-align: center;
-            color: white;
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
         }
         
-        .name {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            letter-spacing: 0.5px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
         }
         
-        .tagline {
-            font-size: 1.35rem;
-            letter-spacing: 1px;
-            font-weight: 300;
-        }
-        
-        /* Resume Button */
-        .resume-button {
-            margin-top: 1.5rem;
-            display: inline-block;
-            background-color: white;
-            color: #1e3a8a;
-            padding: 0.75rem 1.5rem;
-            border-radius: 4rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .resume-button:hover {
-            background-color: rgba(255, 255, 255, 0.9);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        }
-        
-        .resume-icon {
-            vertical-align: middle;
-            margin-right: 0.5rem;
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
         }
         
         /* About Section */
-        .about-section {
-            background: white;
-            padding: 5rem 0;
+        .about {
+            background-color: white;
         }
         
-        .container {
-            max-width: 56rem;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-        
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            text-align: center;
-            color: #1f2937;
-            margin-bottom: 2.5rem;
-            position: relative;
-            padding-bottom: 1rem;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(to right, #1e3a8a, #3b82f6);
-        }
-        
-        .about-card {
-            background: white;
-            border-radius: 0.75rem;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
-            padding: 2.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .about-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
         }
         
         .about-text {
-            color: #4b5563;
-            line-height: 1.9;
-            font-size: 1.15rem;
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-image {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--dark);
+            border-left: 4px solid var(--secondary);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        /* Values Section */
+        .values {
+            background-color: #f8fafc;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .value-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
             text-align: center;
+            transition: all 0.3s ease;
         }
         
-        .about-text b {
-            color: #1e3a8a;
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .value-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .value-card p {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        
+        /* Experience Section */
+        .experience {
+            background-color: white;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background-color: var(--light-gray);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 100%;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            padding-right: calc(50% + 2rem);
+            text-align: right;
+        }
+        
+        .timeline-item:nth-child(even) {
+            padding-left: calc(50% + 2rem);
+            text-align: left;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            border: 4px solid white;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+        
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .timeline-date {
+            color: var(--secondary);
             font-weight: 600;
+            margin-bottom: 0.5rem;
         }
         
-        .highlight {
-            background: linear-gradient(transparent 70%, rgba(59, 130, 246, 0.2) 30%);
-            padding: 0 4px;
+        .timeline-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .timeline-description {
+            color: var(--gray);
+            font-size: 0.95rem;
         }
         
         /* Contact Section */
-        .contact-section {
+        .contact {
+            background-color: #f8fafc;
+        }
+        
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: 100%;
+        }
+        
+        .contact-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
             background: white;
-            padding: 4.5rem 0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            min-width: 40px;
+        }
+        
+        .contact-details h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            color: var(--dark);
+        }
+        
+        .contact-details p, .contact-details a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-details a:hover {
+            color: var(--primary);
         }
         
         .social-links {
             display: flex;
-            justify-content: center;
-            gap: 2.75rem;
+            gap: 1rem;
             margin-top: 1rem;
         }
         
         .social-link {
-            color: #4b5563;
-            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 3rem;
-            height: 3rem;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background-color: #f3f4f6;
+            background-color: white;
+            color: var(--gray);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
         }
         
         .social-link:hover {
             transform: translateY(-3px);
-        }
-        
-        .social-link.instagram:hover {
-            color: #e1306c;
-            background-color: rgba(225, 48, 108, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
         .social-link.facebook:hover {
-            color: #1877f2;
-            background-color: rgba(24, 119, 242, 0.1);
+            background-color: #1877f2;
+            color: white;
+        }
+        
+        .social-link.instagram:hover {
+            background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+            color: white;
         }
         
         .social-link.twitter:hover {
-            color: #1da1f2;
-            background-color: rgba(29, 161, 242, 0.1);
+            background-color: #1da1f2;
+            color: white;
         }
         
         .social-link.linkedin:hover {
-            color: #0077b5;
-            background-color: rgba(0, 119, 181, 0.1);
+            background-color: #0077b5;
+            color: white;
         }
         
         /* Footer */
-        .footer {
-            background: #f9fafb;
-            padding: 1.5rem 0;
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
             text-align: center;
-            color: #6b7280;
-            margin-top: auto;
-            border-top: 1px solid #e5e7eb;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .footer-logo span {
+            color: var(--secondary);
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-social a {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 2rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            width: 100%;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                order: -1;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .timeline::before {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                padding-left: 70px !important;
+                padding-right: 0 !important;
+                text-align: left !important;
+            }
+            
+            .timeline-dot {
+                left: 31px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            section {
+                padding: 3rem 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero {
+                padding: 8rem 0 4rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .profile-photo {
+                width: 150px;
+                height: 150px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="flex flex-col min-h-screen">
-        <!-- Header with blue gradient background -->
-        <div class="header">
-            <!-- Profile Photo -->
-            <div class="profile-photo">
-                <div class="photo-container">
-                    <img src="anjandhakal.jpeg" alt="Anjan Dhakal">
-                </div>
-            </div>
-            <!-- Name and Tagline -->
-            <div class="name-tagline">
-                <h1 class="name">Anjan Dhakal</h1>
-                <p class="tagline">Learner • Dreamer • Explorer</p>
+    <!-- Header Navigation -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Anjan<span>Dhakal</span></a>
                 
-                <!-- Download Resume Button -->
-                <a href="resume.pdf" class="resume-button" download>
-                    <svg class="resume-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    Download Resume
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#values">Values</a>
+                    <a href="#experience">Journey</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="profile-photo">
+                <img src="anjandhakal.jpeg" alt="Anjan Dhakal">
+            </div>
+            
+            <h1>Anjan Dhakal</h1>
+            <p>Learner • Dreamer • Explorer</p>
+            
+            <div class="hero-btns">
+                <a href="resume.pdf" class="btn btn-primary" download>
+                    <i class="fas fa-download"></i> Download Resume
+                </a>
+                <a href="#contact" class="btn btn-outline" style="color: white; border-color: white;">
+                    <i class="fas fa-paper-plane"></i> Contact Me
                 </a>
             </div>
         </div>
-        
-        <!-- About Section -->
-        <div class="about-section">
-            <div class="container">
-                <h2 class="section-title">About Me</h2>
-                <div class="about-card">
-                    <p class="about-text">
-                        A lifelong learner with a foundation in science and a degree in Business Studies from Tribhuvan University, I believe that <span class="highlight">education, empathy, and experience</span> are the cornerstones of meaningful progress. Passionate about books and driven by a purpose greater than personal success, my work is guided by a simple yet powerful mission:<br /><br />
-                        <i>To make the world a better place where all beings can live in happiness and harmony.</i><br /><br />
-                        Throughout my journey, I've embraced opportunities to help those in need — not for recognition, but because it feels right. My path has never been about collecting titles, but about collecting stories — real moments, deep connections, and personal growth. As I often remind myself:<br /><br />
-                        <b>"I would rather collect stories than degrees in my life, for it is the experiences that shape us, not the titles we hold."</b><br /><br />
-                        This belief continues to shape my values, my decisions, and the way I contribute to the world around me.
-                    </p>    
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>With a foundation in science and a degree in Business Studies from Tribhuvan University, I've cultivated a unique perspective that bridges analytical thinking with practical business acumen. My journey has been guided by a deep commitment to creating positive change in society.</p>
+                    
+                    <p>I believe that <span class="highlight">education, empathy, and experience</span> are the cornerstones of meaningful progress. My work is driven by a mission to foster environments where all beings can thrive in happiness and harmony.</p>
+                    
+                    <blockquote class="quote">
+                        "I would rather collect stories than degrees in my life, for it is the experiences that shape us, not the titles we hold."
+                    </blockquote>
+                    
+                    <p>This philosophy has led me to embrace opportunities to help those in need, not for recognition, but because it aligns with my core values. Each experience has contributed to my growth as a compassionate leader and thoughtful contributor to my community.</p>
+                    
+                    <div class="hero-btns" style="justify-content: flex-start; margin-top: 2rem;">
+                        <a href="#experience" class="btn btn-outline">
+                            <i class="fas fa-road"></i> My Journey
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Anjan Dhakal working">
                 </div>
             </div>
         </div>
-        
-        <!-- Get in Touch Section -->
-        <div class="contact-section">
-            <div class="container">
-                <h2 class="section-title">Get in Touch</h2>
-                <div class="social-links">
-                    
-                    <a href="https://www.facebook.com/anjandhakall" class="social-link facebook" aria-label="Facebook">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                        </svg>
-                    </a>
-                    <a href="https://www.instagram.com/_anjandhakal/" class="social-link instagram" aria-label="Instagram">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                        </svg>
-                    </a>
-                    <a href="https://x.com/_anjandhakal" class="social-link twitter" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M17.71 3H20L13.99 10.1L21.5 21H15.88L11.11 14.54L5.69 21H3L9.4 13.4L2.5 3H8.24L12.59 9.02L17.71 3Z"/>
-                        </svg>
-                    </a>
-                    
-                   
-                    <a href="https://www.linkedin.com/in/anjandhakal369/" class="social-link linkedin" aria-label="LinkedIn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                            <rect x="2" y="9" width="4" height="12"></rect>
-                            <circle cx="4" cy="4" r="2"></circle>
-                        </svg>
-                    </a>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values" id="values">
+        <div class="container">
+            <h2 class="section-title">My Core Values</h2>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Compassion</h3>
+                    <p>Believing in the inherent worth of every individual and striving to create positive impact through understanding and empathy in all my endeavors.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Continuous Learning</h3>
+                    <p>Maintaining a curious mind and commitment to personal growth, always seeking new knowledge and perspectives to better serve my community.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Service</h3>
+                    <p>Dedicating my skills and energy to initiatives that uplift others, believing that true success is measured by the lives we positively influence.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>Integrity</h3>
+                    <p>Upholding strong ethical principles in all decisions and actions, ensuring consistency between my values and my behavior.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Collaboration</h3>
+                    <p>Valuing diverse perspectives and working synergistically with others to achieve common goals that benefit the wider community.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>Sustainability</h3>
+                    <p>Promoting practices that ensure long-term wellbeing for people and the planet in all business and social initiatives.</p>
                 </div>
             </div>
         </div>
-        
-        <!-- Footer with Copyright -->
-        <footer class="footer">
-            <p>© <span id="current-year"></span> Anjan Dhakal. All rights reserved.</p>
-        </footer>
-    </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experience">
+        <div class="container">
+            <h2 class="section-title">My Journey</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020 - Present</div>
+                        <h3 class="timeline-title">Social Development Advocate</h3>
+                        <p class="timeline-description">Leading community initiatives focused on education access and youth empowerment, organizing local programs that have impacted hundreds of lives.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2018 - 2020</div>
+                        <h3 class="timeline-title">Business Development Associate</h3>
+                        <p class="timeline-description">Worked with small businesses to develop sustainable growth strategies, helping them navigate challenges and identify new opportunities.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2015 - 2018</div>
+                        <h3 class="timeline-title">Business Studies at Tribhuvan University</h3>
+                        <p class="timeline-description">Earned my degree while actively participating in student organizations focused on social entrepreneurship and community service.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2012 - 2015</div>
+                        <h3 class="timeline-title">Science Foundation</h3>
+                        <p class="timeline-description">Built a strong analytical foundation through science education while beginning my journey in volunteer work and community leadership.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Location</h3>
+                            <p>Kathmandu, Nepal</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <a href="mailto:contact@anjandhakal.com">contact@anjandhakal.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <a href="tel:+9779800000000">+977 980 000 0000</a>
+                        </div>
+                    </div>
+                    
+                    <!-- <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Social Media</h3>
+                            <div class="social-links">
+                                <a href="https://www.facebook.com/anjandhakall" class="social-link facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://www.instagram.com/_anjandhakal/" class="social-link instagram">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="https://x.com/_anjandhakal" class="social-link twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/anjandhakal369/" class="social-link linkedin">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="#" class="footer-logo">Anjan<span>Dhakal</span></a>
+                
+                <!-- <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#values">Values</a>
+                    <a href="#experience">Journey</a>
+                    <a href="#contact">Contact</a>
+                    <a href="resume.pdf" download>Resume</a>
+                </div> -->
+                
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/anjandhakall"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/_anjandhakal/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/_anjandhakal"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/in/anjandhakal369/"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                
+                <div class="copyright">
+                    &copy; <span id="current-year"></span> Anjan Dhakal. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script>
         // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    navLinks.style.display = 'none';
+                }
+            });
+        });
     </script>
 </body>
 </html>
